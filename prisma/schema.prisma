@@ -13,58 +13,58 @@ datasource db {
 }
 
 model Area {
-  id             Int              @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name           String
-  city           String
+  name String
+  city String
 
-  postcode       String?
-  region         String?
+  postcode String?
+  region   String?
 
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  rentalData     RentalData[]
-  crimeData      CrimeData[]
-  broadbandData  BroadbandData[]
+  rentalData    RentalData[]
+  crimeData     CrimeData[]
+  broadbandData BroadbandData[]
 }
 
 model RentalData {
-  id             Int              @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  averageRent    Int
-  rentGrowth     Float?
+  averageRent Int
+  rentGrowth  Float?
 
-  recordedAt     DateTime         @default(now())
+  recordedAt DateTime @default(now())
 
-  areaId         Int
-  area           Area             @relation(fields: [areaId], references: [id])
+  areaId Int
+  area   Area @relation(fields: [areaId], references: [id])
 
-  createdAt      DateTime         @default(now())
+  createdAt DateTime @default(now())
 }
 
 model CrimeData {
-  id             Int              @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  crimeScore     Int
+  crimeScore Int
 
-  recordedAt     DateTime         @default(now())
+  recordedAt DateTime @default(now())
 
-  areaId         Int
-  area           Area             @relation(fields: [areaId], references: [id])
+  areaId Int
+  area   Area @relation(fields: [areaId], references: [id])
 
-  createdAt      DateTime         @default(now())
+  createdAt DateTime @default(now())
 }
 
 model BroadbandData {
-  id             Int              @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  averageSpeed   Int
+  averageSpeed Int
 
-  recordedAt     DateTime         @default(now())
+  recordedAt DateTime @default(now())
 
-  areaId         Int
-  area           Area             @relation(fields: [areaId], references: [id])
+  areaId Int
+  area   Area @relation(fields: [areaId], references: [id])
 
-  createdAt      DateTime         @default(now())
+  createdAt DateTime @default(now())
 }
