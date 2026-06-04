@@ -27,6 +27,7 @@ model Area {
   rentalData    RentalData[]
   crimeData     CrimeData[]
   broadbandData BroadbandData[]
+  commuteData   CommuteData[]
 }
 
 model RentalData {
@@ -60,6 +61,20 @@ model BroadbandData {
   id Int @id @default(autoincrement())
 
   averageSpeed Int
+
+  recordedAt DateTime @default(now())
+
+  areaId Int
+  area   Area @relation(fields: [areaId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model CommuteData {
+  id Int @id @default(autoincrement())
+
+  destination    String
+  averageMinutes Int
 
   recordedAt DateTime @default(now())
 
