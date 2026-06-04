@@ -13,27 +13,33 @@ datasource db {
 }
 
 model Area {
-  id          Int      @id @default(autoincrement())
-  name        String
-  city        String
+  id             Int              @id @default(autoincrement())
+  name           String
+  city           String
+  postcode       String?
+  region         String?
 
-  rentalData  RentalData?
-  crimeData   CrimeData?
-  broadbandData BroadbandData?
+  rentalData     RentalData[]
+  crimeData      CrimeData[]
+  broadbandData  BroadbandData[]
 }
 
 model RentalData {
-  id           Int    @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   averageRent  Int
-  rentGrowth   Float
+  rentGrowth   Float?
 
-  areaId       Int    @unique
-  area         Area   @relation(fields: [areaId], references: [id])
+  recordedAt   DateTime @default(now())
+
+  areaId       Int
+  area         Area @relation(fields: [areaId], references: [id])
 }
 
 model CrimeData {
   id          Int    @id @default(autoincrement())
   crimeScore  Int
+
+  recordedAt DateTime @default(now())
 
   areaId      Int    @unique
   area        Area   @relation(fields: [areaId], references: [id])
@@ -42,6 +48,8 @@ model CrimeData {
 model BroadbandData {
   id             Int    @id @default(autoincrement())
   averageSpeed   Int
+
+  recordedAt DateTime @default(now())
 
   areaId         Int    @unique
   area           Area   @relation(fields: [areaId], references: [id])
