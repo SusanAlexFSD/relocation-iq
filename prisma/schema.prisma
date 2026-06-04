@@ -14,10 +14,15 @@ datasource db {
 
 model Area {
   id             Int              @id @default(autoincrement())
+
   name           String
   city           String
+
   postcode       String?
   region         String?
+
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
   rentalData     RentalData[]
   crimeData      CrimeData[]
@@ -25,32 +30,41 @@ model Area {
 }
 
 model RentalData {
-  id           Int      @id @default(autoincrement())
-  averageRent  Int
-  rentGrowth   Float?
+  id             Int              @id @default(autoincrement())
 
-  recordedAt   DateTime @default(now())
+  averageRent    Int
+  rentGrowth     Float?
 
-  areaId       Int
-  area         Area @relation(fields: [areaId], references: [id])
+  recordedAt     DateTime         @default(now())
+
+  areaId         Int
+  area           Area             @relation(fields: [areaId], references: [id])
+
+  createdAt      DateTime         @default(now())
 }
 
 model CrimeData {
-  id          Int    @id @default(autoincrement())
-  crimeScore  Int
+  id             Int              @id @default(autoincrement())
 
-  recordedAt DateTime @default(now())
+  crimeScore     Int
 
-  areaId      Int    @unique
-  area        Area   @relation(fields: [areaId], references: [id])
+  recordedAt     DateTime         @default(now())
+
+  areaId         Int
+  area           Area             @relation(fields: [areaId], references: [id])
+
+  createdAt      DateTime         @default(now())
 }
 
 model BroadbandData {
-  id             Int    @id @default(autoincrement())
+  id             Int              @id @default(autoincrement())
+
   averageSpeed   Int
 
-  recordedAt DateTime @default(now())
+  recordedAt     DateTime         @default(now())
 
-  areaId         Int    @unique
-  area           Area   @relation(fields: [areaId], references: [id])
+  areaId         Int
+  area           Area             @relation(fields: [areaId], references: [id])
+
+  createdAt      DateTime         @default(now())
 }
