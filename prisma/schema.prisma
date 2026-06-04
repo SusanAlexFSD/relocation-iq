@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Area {
+  id          Int      @id @default(autoincrement())
+  name        String
+  city        String
+
+  rentalData  RentalData?
+  crimeData   CrimeData?
+  broadbandData BroadbandData?
+}
+
+model RentalData {
+  id           Int    @id @default(autoincrement())
+  averageRent  Int
+  rentGrowth   Float
+
+  areaId       Int    @unique
+  area         Area   @relation(fields: [areaId], references: [id])
+}
+
+model CrimeData {
+  id          Int    @id @default(autoincrement())
+  crimeScore  Int
+
+  areaId      Int    @unique
+  area        Area   @relation(fields: [areaId], references: [id])
+}
+
+model BroadbandData {
+  id             Int    @id @default(autoincrement())
+  averageSpeed   Int
+
+  areaId         Int    @unique
+  area           Area   @relation(fields: [areaId], references: [id])
+}
