@@ -1,46 +1,62 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+"use client";
+import { useState } from "react";
 
 export default function RecommendPage() {
+
+const [salary, setSalary] = useState("");
+const [maxCommute, setMaxCommute] = useState("");
+const [bedrooms, setBedrooms] = useState("");
+
   return (
-    <main className="max-w-2xl mx-auto p-6">
+    <main className="p-8">
       <h1 className="text-3xl font-bold mb-6">
         Find Your Ideal Area
       </h1>
 
-      <div className="space-y-6">
-
+      <form className="space-y-4">
         <div>
-          <Label>Annual Salary</Label>
-          <Input placeholder="42000" />
+          <label className="block mb-2">
+            Salary
+          </label>
+
+          <input
+            type="number"
+            name="salary"
+            className="border p-2 rounded w-full"
+          />
         </div>
 
         <div>
-          <Label>Work Location</Label>
-          <Input placeholder="Glasgow City Centre" />
+          <label className="block mb-2">
+            Maximum Commute (minutes)
+          </label>
+
+          <input
+            type="number"
+            name="maxCommute"
+            className="border p-2 rounded w-full"
+          />
         </div>
 
         <div>
-            <Label>Maximum Commute (minutes)</Label>
-            <Input placeholder="45" />
+          <label className="block mb-2">
+            Bedrooms
+          </label>
+
+          <input
+            type="number"
+            name="bedrooms"
+            className="border p-2 rounded w-full"
+          />
         </div>
 
-        <div>
-            <Label>Bedrooms Required</Label>
-            <Input placeholder="2" />
-        </div>
-
-        <div>
-            <Label>Priority</Label>
-            <Input placeholder="Affordability" />
-        </div>
-
-        <Button>
-             Generate Recommendations
-        </Button>
-
-      </div>
+        <button
+          type="submit"
+          className="border px-4 py-2 rounded"
+        >
+          Generate Recommendations
+        </button>
+      </form>
     </main>
   );
 }
