@@ -7,16 +7,22 @@ export function calculateScore(
   commute: number,
   request: RecommendationRequest
 ) {
-  const affordabilityScore = 2000 - rent;
+  const monthlySalary = request.salary / 12;
+
+  const affordableRent = monthlySalary * 0.3;
+
+  const affordabilityScore =
+    affordableRent - rent;
 
   const commuteScore =
     commute <= request.maxCommute
       ? 100
-      : 0;
+      : -100;
 
   const safetyScore = crime;
 
-  const broadbandScore = broadband / 10;
+  const broadbandScore =
+    broadband / 10;
 
   return (
     affordabilityScore +
