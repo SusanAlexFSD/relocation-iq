@@ -19,15 +19,18 @@ model Area {
   city String
 
   postcode String?
-  region   String?
+  region String?
+
+  latitude Float?
+  longitude Float?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  rentalData    RentalData[]
-  crimeData     CrimeData[]
+  rentalData RentalData[]
+  crimeData CrimeData[]
   broadbandData BroadbandData[]
-  commuteData   CommuteData[]
+  commuteData CommuteData[]
 }
 
 model RentalData {
@@ -86,4 +89,18 @@ model CommuteData {
   area   Area @relation(fields: [areaId], references: [id])
 
   createdAt DateTime @default(now())
+}
+
+model LocationCache {
+  id Int @id @default(autoincrement())
+
+  searchTerm String @unique
+
+  displayName String
+
+  latitude Float
+  longitude Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
