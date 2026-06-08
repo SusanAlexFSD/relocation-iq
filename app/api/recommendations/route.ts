@@ -23,8 +23,22 @@ console.log(body);
   });
 
   const recommendations = areas.map((area) => {
-    const rent =
-      area.rentalData[area.rentalData.length - 1]?.averageRent ?? 0;
+    const latestRental =
+  area.rentalData[area.rentalData.length - 1];
+
+let rent = 0;
+
+if (latestRental) {
+  if (recommendationRequest.bedrooms === 1) {
+    rent = latestRental.averageRent1Bed ?? 0;
+  } else if (recommendationRequest.bedrooms === 2) {
+    rent = latestRental.averageRent2Bed ?? 0;
+  } else if (recommendationRequest.bedrooms === 3) {
+    rent = latestRental.averageRent3Bed ?? 0;
+  } else {
+    rent = latestRental.averageRent4Bed ?? 0;
+  }
+}
 
     const crime =
       area.crimeData[area.crimeData.length - 1]?.crimeScore ?? 0;

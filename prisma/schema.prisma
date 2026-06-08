@@ -33,13 +33,17 @@ model Area {
 model RentalData {
   id Int @id @default(autoincrement())
 
-  averageRent Int
-  rentGrowth  Float?
+  averageRent1Bed Int?
+  averageRent2Bed Int?
+  averageRent3Bed Int?
+  averageRent4Bed Int?
+
+  rentGrowth Float?
 
   recordedAt DateTime @default(now())
 
   areaId Int
-  area   Area @relation(fields: [areaId], references: [id])
+  area Area @relation(fields: [areaId], references: [id])
 
   createdAt DateTime @default(now())
 }
